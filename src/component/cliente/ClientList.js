@@ -19,6 +19,15 @@ const ClientList = ({mostrarForm}) => {
             } )
     }
 
+    const actions = (values) => {
+        console.log("values", values);
+        return (
+            <>
+                <Button icon="pi pi-pencil" className="p-button-rounded p-button-success p-mr-2" onClick={() => console.log("values", values)} />
+                <Button icon="pi pi-trash" className="p-button-rounded p-button-warning" onClick={() => "chamar delete function"} />
+            </>
+    )}
+
     return (
         <div className="card">
             <Button label="cadastrar"  onClick={() => mostrarForm(true)}/>
@@ -29,6 +38,8 @@ const ClientList = ({mostrarForm}) => {
                 <Column field="email" header="email"></Column>
                 <Column field="celular" header="celular"></Column>
                 <Column field="localizacao" header="localizacao"></Column>
+                <Column field="status" header="status"></Column>
+                <Column body={(rowData) => actions(rowData)}>/></Column>
             </DataTable>
         </div>
     )
