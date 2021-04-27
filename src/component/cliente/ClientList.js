@@ -8,13 +8,14 @@ const ClientList = ({mostrarForm}) => {
     const [clientes, setClientes] = useState([]);
 
     useEffect(() => {
-        // buscarClientes();
+        buscarClientes();
     }, [])
 
     const buscarClientes = () => {
-        axios.get("http://localhost:8080/user-controller/list")
+        axios.get("http://test.portalpostal.com.br:9083/secure/customers/")
             .then(resultado => {
-                setClientes(resultado.data)
+                resultado && console.log("resultado", resultado);
+                resultado && setClientes(resultado.data.data.customerList)
             } )
     }
 
@@ -23,12 +24,11 @@ const ClientList = ({mostrarForm}) => {
             <Button label="cadastrar"  onClick={() => mostrarForm(true)}/>
 
             <DataTable value={clientes}>
-                <Column field="nome" header="Nome"></Column>
-                <Column field="cpf" header="cpf"></Column>
+                <Column field="name" header="Nome"></Column>
+                <Column field="federalId" header="cpf"></Column>
                 <Column field="email" header="email"></Column>
                 <Column field="celular" header="celular"></Column>
                 <Column field="localizacao" header="localizacao"></Column>
-                <Column field="status" header="status"></Column>
             </DataTable>
         </div>
     )
